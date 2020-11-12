@@ -62,8 +62,5 @@ Select * From BandView;
 Select * From PlayListView;
 Select * From User_PlayList;
 
-Select * From Audio;
+Select * FRom AudioViewFullText Where CONTAINS((Title, Band),N'"√‡Á**"');
 
-Select * FRom AudioView Where CONTAINS(Title,'Hate');
-
-Select * From Audio;
