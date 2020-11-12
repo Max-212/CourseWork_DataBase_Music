@@ -2,17 +2,19 @@
 
 drop View AudioView;
 -- Инфо о песне
-Create View AudioView As
+Create View AudioView
+With SCHEMABINDING
+As
 Select Audio.Id As Id,
 	   Audio.Title As Title,
 	   Band.Title As Band,
 	   Album.Title As Album,
 	   Audio.[Year] As [Year],
 	   Genre.Title As Genre
-From Audio left join Band On Audio.BandId = Band.Id
-	left join Album On Audio.AlbumId = Album.Id
-	left join Audio_Genre On Audio_Genre.AudioId = Audio.Id
-	left join Genre On Audio_Genre.GenreId = Genre.Id;
+From dbo.Audio left join dbo.Band On Audio.BandId = Band.Id
+	left join dbo.Album On Audio.AlbumId = Album.Id
+	left join dbo.Audio_Genre On Audio_Genre.AudioId = Audio.Id
+	left join dbo.Genre On Audio_Genre.GenreId = Genre.Id;
 	
 
 drop View BandView
@@ -42,7 +44,26 @@ Select [User].[Login] As [Login],
 From [User] left join User_PlayList On [User].Id = User_PlayList.UserId 
 	left join PlayList on PlayList.Id = User_PlayList.PlayListId;   
 
+--инфо о песне с полнотекстовым поиском
+Create View AudioViewFullText
+With SCHEMABINDING
+As
+Select Audio.Id As Id,
+	   Audio.Title As Title,
+	   Band.Title As Band,
+	   Album.Title As Album,
+	   Audio.[Year] As [Year]
+From dbo.Audio inner join dbo.Band On Audio.BandId = Band.Id
+	inner join dbo.Album On Audio.AlbumId = Album.Id
+	
+
 Select * From AudioView;
 Select * From BandView;
 Select * From PlayListView;
 Select * From User_PlayList;
+
+Select * From Audio;
+
+Select * FRom AudioView Where CONTAINS(Title,'Hate');
+
+Select * From Audio;
