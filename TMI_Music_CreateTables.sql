@@ -2,7 +2,7 @@ create database TMI_Music_BSTU_2020;
 
 use TMI_Music_BSTU_2020;
 
-Drop table Audio
+
 -- Таблица песен
 DROP table Audio
 create table Audio
@@ -12,7 +12,7 @@ create table Audio
 	[Year] nvarchar(4),
 	 
 	BandId int not null,
-	AlbumId int 
+	AlbumId int not null,
 
 	CONSTRAINT PK_AudioID PRIMARY KEY (Id),
 
@@ -20,7 +20,7 @@ create table Audio
 		REFERENCES Band (Id) ,
 
 	CONSTRAINT FK_Album FOREIGN KEY(AlbumId)
-		REFERENCES Album (Id) ON DELETE SET NULL,
+		REFERENCES Album (Id)
 )
 
 Drop table Album;

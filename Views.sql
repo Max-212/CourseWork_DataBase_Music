@@ -3,7 +3,6 @@
 drop View AudioView;
 -- Инфо о песне
 Create View AudioView
-With SCHEMABINDING
 As
 Select Audio.Id As Id,
 	   Audio.Title As Title,
@@ -61,6 +60,7 @@ Select * From AudioView;
 Select * From BandView;
 Select * From PlayListView;
 Select * From User_PlayList;
+Select * From UserView
 
 Select * FRom AudioViewFullText Where CONTAINS((Title, Band),N'"Газ**"');
 

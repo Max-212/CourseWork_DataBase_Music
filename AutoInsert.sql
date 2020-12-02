@@ -1,4 +1,3 @@
-Exec AudioAdd RAND(), '1991', 'Nirvana', 'Nevermind';
 
 Drop Procedure CreateString;
 

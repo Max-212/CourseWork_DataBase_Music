@@ -1,23 +1,44 @@
 --Удаление музыкальной группы
+drop Procedure BandRemove
 Create Procedure BandRemove
 				@BandId int
 As
 Begin
+	If NOT EXISTS (Select Id From Band Where Id = @BandId)
+	Begin
+		Print 'Band with this id not exists';
+		return;
+	End;
+
+	If EXISTS (Select Top(1) Id From Audio Where BandId = @BandId)
+	Begin
+		Print 'The Audio with this band exists';
+		return;
+	End;
+
 	Delete From Band Where Id = @BandId;
 End;
 
 
 --Удаление альбома 
+drop Procedure AlbumRemove
 Create Procedure AlbumRemove
 				@AlbumId int
 As
 Begin
+	If NOT EXISTS (Select Id From Album Where Id = @AlbumId)
+	Begin
+		Print 'Album with this id not exists';
+		return;
+	End;
+
+	If EXISTS (Select Top(1) Id From Audio Where AlbumId = @AlbumId)
+	Begin
+		Print 'The Audio with this album exists';
+		return;
+	End;
 	Delete From Album Where Id = @AlbumId;
 End;
-
-Exec AlbumRemove 1001;
-
-
 
 -- Удаление музыканта
 Create Procedure MemberRemove
@@ -108,7 +129,7 @@ End;
 
 --Тесты
 
-
+Exec BandRemove 1000
 
 Select * From User_PlayList
 Select * From Band;
